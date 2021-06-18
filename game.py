@@ -1,30 +1,31 @@
 from ursina import *
+from ursina.prefabs.first_person_controller import FirstPersonController
+
+colors = [color.green, color.brown]
 
 app = Ursina()
 
-player = Entity(model='cube', color=color.orange, scale_y=2)
+player = FirstPersonController()
 
-ground = Entity(
+ground_particle = Entity(
     model='cube',
-    color=color.magenta,
+    color=color.green,
     z=-.1,
     y=-3,
     origin=(0, .5),
-    scale=(50, 1, 10),
-    collider='box'
+    scale=(100, 5, 100),
+    collider='box',
+    texture="heightmap_1"
 )
 
+#e = Entity(model=Terrain('heightmap_1', skip=12), scale=(200,16,200), texture='heightmap_1', collider='mesh')
 
 def update():   # update gets automatically called.
-    player.x += held_keys['d'] * .1
-    player.x -= held_keys['a'] * .1
+    pass
 
 
 def input(key):
-    if key == 'space':
-        player.y += 3
-        for i in range(1, 3):
-            invoke(setattr, player, 'y', player.y-1, delay=.25)
+    pass
 
 
 app.run()   # opens a window and starts the game.
